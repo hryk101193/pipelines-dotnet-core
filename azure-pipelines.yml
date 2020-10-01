@@ -20,11 +20,11 @@ steps:
   inputs:
     command: 'publish'
     publishWebProjects: true
-    arguments: '--configuration testconfig --output teststaging'
+    arguments: '--configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)'
 
 - task: AzureWebApp@1
   inputs:
     azureSubscription: '無料試用版(3c0e1071-a943-4dff-8746-a02f9c870a0a)'
     appType: 'webAppLinux'
     appName: 'test-auto-devops-hryk'
-    package: 'teststaging/**/*.zip'
+    package: '$(Build.ArtifactStagingDirectory)/**/*.zip'
